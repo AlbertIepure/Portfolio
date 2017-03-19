@@ -1,0 +1,10 @@
+----------------------------  dsp_lab.pjt - Debug  ----------------------------
+[c6416dskinit.c] "C:\CCStudio_v3.3\C6000\cgtools\bin\cl6x" -g -o2 -fr"H:/msdos/Lab_Assignments/ass_41_1/Debug" -i"c:/CCStudio_v3.3/c6000/dsk6416/include" -d"CHIP_6416" -mv6400 --mem_model:data=far -@"H:/msdos/Lab_Assignments/ass_41_1/Debug.lkf" "c6416dskinit.c"
+
+[dsp_lab.c] "C:\CCStudio_v3.3\C6000\cgtools\bin\cl6x" -g -o2 -fr"H:/msdos/Lab_Assignments/ass_41_1/Debug" -i"c:/CCStudio_v3.3/c6000/dsk6416/include" -d"CHIP_6416" -mv6400 --mem_model:data=far -@"Debug.lkf" "dsp_lab.c"
+
+[Linking...] "C:\CCStudio_v3.3\C6000\cgtools\bin\cl6x" -@"Debug.lkf"
+<Linking>
+
+Build Complete,
+  0 Errors, 0 Warnings, 0 Remarks.

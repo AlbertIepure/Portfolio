@@ -1,0 +1,31 @@
+#define N 9
+float x[N];                        //filter delay line
+float h[N]={0.0581, -0.0275,-0.1060,0.2917,0.6196,0.2917, -0.1060,-0.0275,0.0581};
+
+
+interrupt void c_int11() //ISR - AIC23 codec interrupts at 8kHz
+{
+   short out_sample;
+   out_sample = sine_table[loopindex++]*gain; // your logic will come here to do upsampling and downsampling
+
+  output_left_sample((short)low_pass_filter(out_sample)); //output to codec
+
+out_buffer[bufindex++] = out_sample;     //store in buffer
+  if (loopindex >= LOOPLENGTH) loopindex = 0; //check for end of table
+  if (bufindex >= BUFFERLENGTH) bufindex = 0; //check for end of buffer  
+  return;
+}
+
+float low_pass_filter(short input_val) // define function prototype in corresponding header file
+{
+  short i;
+  float yn = 0.0;
+
+  x[0] = input_val; //get new input into delay line
+  for (i=0 ; i<N ; i++) //calculate filter output, N are the number of fir filter coefficients
+    yn += h[i]*x[i];
+  for (i=(N-1) ; i>0 ; i--) //shuffle delay line contents
+    x[i] = x[i-1]; 
+
+return yn;
+}

@@ -1,0 +1,2 @@
+For an input of 2 V peak-to-peak sinusoidal signal at 1 kHz, the output is dramatically reduced
+when the frequency increases between 7.5-8 Khz (@ 8KHz the p2p value is <0.5V). Thus the bandwidth of the codec is around 7.5-8 Khz.

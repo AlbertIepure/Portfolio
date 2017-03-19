@@ -1,0 +1,14 @@
+----------------------------  dsp_lab.pjt - Debug  ----------------------------
+[c6416dskinit.c] "C:\CCStudio_v3.3\C6000\cgtools\bin\cl6x" -g -fr"J:/DSP Lab/msdos/Lab_Assignments/ass_58_2/Debug" -i"C:/CCStudio_v3.3/C6000/dsk6416/include" -d"CHIP_6416" -mv6400 --mem_model:data=far -@"J:/DSP Lab/msdos/Lab_Assignments/ass_58_2/Debug.lkf" "c6416dskinit.c"
+
+[Vectors_intr.asm] "C:\CCStudio_v3.3\C6000\cgtools\bin\cl6x" -g -fr"J:/DSP Lab/msdos/Lab_Assignments/ass_58_2/Debug" -i"C:/CCStudio_v3.3/C6000/dsk6416/include" -d"CHIP_6416" -mv6400 --mem_model:data=far -@"J:/DSP Lab/msdos/Lab_Assignments/ass_58_2/Debug.lkf" "Vectors_intr.asm"
+
+[dsp_lab.c] "C:\CCStudio_v3.3\C6000\cgtools\bin\cl6x" -g -fr"J:/DSP Lab/msdos/Lab_Assignments/ass_58_2/Debug" -i"C:/CCStudio_v3.3/C6000/dsk6416/include" -d"CHIP_6416" -mv6400 --mem_model:data=far -@"Debug.lkf" "dsp_lab.c"
+
+[sine8_buf.c] "C:\CCStudio_v3.3\C6000\cgtools\bin\cl6x" -g -fr"J:/DSP Lab/msdos/Lab_Assignments/ass_58_2/Debug" -i"C:/CCStudio_v3.3/C6000/dsk6416/include" -d"CHIP_6416" -mv6400 --mem_model:data=far -@"Debug.lkf" "sine8_buf.c"
+
+[Linking...] "C:\CCStudio_v3.3\C6000\cgtools\bin\cl6x" -@"Debug.lkf"
+<Linking>
+
+Build Complete,
+  0 Errors, 0 Warnings, 0 Remarks.

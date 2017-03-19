@@ -1,0 +1,14 @@
+----------------------------  dsp_lab.pjt - Debug  ----------------------------
+[c6416dskinit.c] "C:\CCStudio_v3.3\C6000\cgtools\bin\cl6x" -g -fr"H:/msdos/Lab_Assignments/ass_52_0/Debug" -i"c:/CCStudio_v3.3/c6000/dsk6416/include" -d"CHIP_6416" -mv6400 --mem_model:data=far -@"H:/msdos/Lab_Assignments/ass_52_0/Debug.lkf" "c6416dskinit.c"
+
+[Vectors_poll.asm] "C:\CCStudio_v3.3\C6000\cgtools\bin\cl6x" -g -fr"H:/msdos/Lab_Assignments/ass_52_0/Debug" -i"c:/CCStudio_v3.3/c6000/dsk6416/include" -d"CHIP_6416" -mv6400 --mem_model:data=far -@"H:/msdos/Lab_Assignments/ass_52_0/Debug.lkf" "Vectors_poll.asm"
+
+[cos_gen.c] "C:\CCStudio_v3.3\C6000\cgtools\bin\cl6x" -g -fr"H:/msdos/Lab_Assignments/ass_52_0/Debug" -i"c:/CCStudio_v3.3/c6000/dsk6416/include" -d"CHIP_6416" -mv6400 --mem_model:data=far -@"Debug.lkf" "cos_gen.c"
+
+[dsp_lab.c] "C:\CCStudio_v3.3\C6000\cgtools\bin\cl6x" -g -fr"H:/msdos/Lab_Assignments/ass_52_0/Debug" -i"c:/CCStudio_v3.3/c6000/dsk6416/include" -d"CHIP_6416" -mv6400 --mem_model:data=far -@"Debug.lkf" "dsp_lab.c"
+
+[Linking...] "C:\CCStudio_v3.3\C6000\cgtools\bin\cl6x" -@"Debug.lkf"
+<Linking>
+
+Build Complete,
+  0 Errors, 0 Warnings, 0 Remarks.

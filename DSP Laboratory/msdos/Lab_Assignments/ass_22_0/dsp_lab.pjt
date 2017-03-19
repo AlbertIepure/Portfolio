@@ -1,0 +1,62 @@
+; Code Composer Project File, Version 2.0 (do not modify or remove this line)
+
+[Project Settings]
+ProjectDir="H:\msdos\Lab_Assignments\ass_22_0\"
+ProjectType=Executable
+CPUFamily=TMS320C64XX
+Tool="Compiler"
+Tool="CustomBuilder"
+Tool="DspBiosBuilder"
+Tool="Linker"
+Config="Debug"
+Config="Release"
+
+[Source Files]
+Source="C:\CCStudio_v3.3\C6000\cgtools\lib\rts6400.lib"
+Source="C:\CCStudio_v3.3\C6000\csl\lib\csl6416.lib"
+Source="C:\CCStudio_v3.3\C6000\dsk6416\lib\dsk6416bsl.lib"
+Source="C:\CCStudio_v3.3\MyProjects\Support\c6416dskinit.c"
+Source="C:\CCStudio_v3.3\MyProjects\Support\c6416dskinit.h"
+Source="C:\CCStudio_v3.3\MyProjects\support\Vectors_intr.asm"
+Source="cos8_buf\cos8_buf.c"
+Source="cos8_buf\cos8_buf.h"
+Source="cos8_buf\dsp_lab.c"
+Source="cos8_buf\parameter.h"
+Source="C:\CCStudio_v3.3\MyProjects\Support\C6416dsk.cmd"
+
+["Compiler" Settings: "Debug"]
+Options=-g -fr"$(Proj_dir)\Debug" -i"C:\CCStudio_v3.3\C6000\dsk6416\include" -d"CHIP_6416" -mv6400 --mem_model:data=far
+
+["Compiler" Settings: "Release"]
+Options=-o3 -fr"$(Proj_dir)\Release" -mv6400
+
+["Linker" Settings: "Debug"]
+Options=-c -m".\Debug\dsp_lab.map" -o".\Debug\dsp_lab.out" -w -x -i"C:\CCStudio_v3.3\C6000\dsk6416\lib" -l"rts6400.lib" -l"dsk6416bsl.lib" -l"csl6416.lib"
+
+["Linker" Settings: "Release"]
+Options=-c -m".\Release\dsp_lab.map" -o".\Release\dsp_lab.out" -w -x
+
+["C:\CCStudio_v3.3\MyProjects\Support\c6416dskinit.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["C:\CCStudio_v3.3\MyProjects\Support\c6416dskinit.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["cos8_buf\cos8_buf.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["cos8_buf\cos8_buf.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["cos8_buf\parameter.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["cos8_buf\parameter.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["C:\CCStudio_v3.3\MyProjects\Support\C6416dsk.cmd" Settings: "Debug"]
+LinkOrder=1
+
+["C:\CCStudio_v3.3\MyProjects\Support\C6416dsk.cmd" Settings: "Release"]
+LinkOrder=1
+

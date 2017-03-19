@@ -1,0 +1,22 @@
+\begin{thenomenclature} 
+
+ \nomgroup{A}
+
+  \item [{DVI}]\begingroup \markup{D}e\markup{v}ice                    \markup{I}ndependent, Dateiendung\nomeqref {2.0}
+		\nompageref{5}
+  \item [{EPS}]\begingroup \markup{E}ncapsulated                    \markup{P}ost\markup{s}cript, Dateiendung\nomeqref {2.0}
+		\nompageref{7}
+  \item [{PDF}]\begingroup \markup{P}ortable                    \markup{D}ocument                    \markup{F}ormat, Dateiendung\nomeqref {2.0}
+		\nompageref{7}
+  \item [{PS}]\begingroup \markup{P}ost\markup{s}cript, Dateiendung\nomeqref {2.0}
+		\nompageref{7}
+  \item [{UCS}]\begingroup \markup{U}niversal \markup{C}haracter \markup{S}et\nomeqref {2.0}
+		\nompageref{9}
+  \item [{URL}]\begingroup \markup{U}niform \markup{R}esource \markup{L}ocator\nomeqref {1.0}
+		\nompageref{1}
+  \item [{UTF}]\begingroup \markup{U}CS \markup{T}ransformation \markup{F}ormat\nomeqref {2.0}
+		\nompageref{9}
+  \item [{WWW}]\begingroup \markup{W}orld \markup{W}ide \markup{W}eb\nomeqref {0.0}
+		\nompageref{1}
+
+\end{thenomenclature}

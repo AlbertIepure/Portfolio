@@ -1,0 +1,557 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0053)http://www.labbookpages.co.uk/audio/firWindowing.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+
+	<title>FIR Filters by Windowing - The Lab Book Pages</title>
+	<meta name="Author" content="Andrew Greensted">
+
+	<link href="http://www.labbookpages.co.uk/rss.xml" rel="alternate" type="application/rss+xml" title="Sitewide RSS Feed">
+
+		<meta name="Keywords" content="FIR fitlers, non-recursive, sinc function, impulse response, low pass, high pass, band pass, band stop">
+	
+	<link rel="icon" href="http://www.labbookpages.co.uk/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="http://www.labbookpages.co.uk/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="./FIR Filters by Windowing - The Lab Book Pages_files/mainStyle.css" title="Standard">
+	<!--[if IE 6]><link rel="stylesheet" type="text/css" href="/common/styles/ie6.css" /><![endif]-->
+
+	<link rel="stylesheet" type="text/css" href="./FIR Filters by Windowing - The Lab Book Pages_files/printStyle.css" media="print">
+
+	<script type="text/javascript" src="./FIR Filters by Windowing - The Lab Book Pages_files/pageControls.js"></script><style type="text/css"></style>
+	<script type="text/javascript" src="./FIR Filters by Windowing - The Lab Book Pages_files/statsLoader.js"></script>
+
+	
+</head>
+
+<body>
+
+<div id="logo"></div>
+
+<div id="title">
+	<h1><a href="http://www.labbookpages.co.uk/index.html">The Lab Book Pages</a></h1>
+	<p>An online collection of electronics information</p>
+</div>
+
+<div id="searchBlock">
+	<!-- SiteSearch Google -->
+	<form method="get" action="http://www.google.co.uk/search">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="hidden" name="oe" value="UTF-8">
+		<input type="hidden" name="domains" value="http://www.labbookpages.co.uk">
+		<input type="text" name="q" size="16" maxlength="255" value="">
+		<input type="submit" name="btnG" value="Search">
+		<span style="display:none"><input checked="checked" type="radio" name="sitesearch" value="http://www.labbookpages.co.uk">http://www.labbookpages.co.uk</span>
+	</form>
+	<!-- SiteSearch Google -->
+	<p id="authorMod"><a href="http://www.labbookpages.co.uk/home/about.html">Dr. Andrew Greensted</a><br>Last modified: 4th May 2010</p>
+	<p style="margin:0px;padding:3px 0px 0px 0px;"><span id="menuSwitch" onclick="switchMenu()">Hide Menu</span></p>
+</div>
+
+<br clear="all">
+
+<div id="mainSection">
+
+<div id="leftColumn">
+
+		<div class="content" style="padding:4px">
+		<div id="menu">
+			<ul>
+	<li><a class="collapsed" href="http://www.labbookpages.co.uk/index.html">Home</a> </li>
+	<li><a class="expanded" href="http://www.labbookpages.co.uk/audio.html">Audio</a><ul>
+		<li><a class="collapsed" href="http://www.labbookpages.co.uk/audio/beamforming.html">Microphone Array Beamforming</a> </li>
+		<li><a class="active" href="./FIR Filters by Windowing - The Lab Book Pages_files/FIR Filters by Windowing - The Lab Book Pages.htm">FIR Filters by Windowing</a> </li>
+		<li><a href="http://www.labbookpages.co.uk/audio/javaWavFiles.html">Java Wav File IO</a> </li>
+		<li><a href="http://www.labbookpages.co.uk/audio/saffireLinux.html">Saffire Pro 10 with Linux</a> </li>
+		<li><a href="http://www.labbookpages.co.uk/audio/wavFiles.html">Wav Files</a> </li>
+		<li><a href="http://www.labbookpages.co.uk/audio/wavGenFunc.html">Waveform Generation Functions</a> </li>
+	</ul> </li>
+	<li><a class="collapsed" href="http://www.labbookpages.co.uk/circuits.html">Circuits</a> </li>
+	<li><a class="collapsed" href="http://www.labbookpages.co.uk/computing.html">Computing</a> </li>
+	<li><a class="collapsed" href="http://www.labbookpages.co.uk/electronics.html">Electronics</a> </li>
+	<li><a class="collapsed" href="http://www.labbookpages.co.uk/fpgas.html">FPGAs</a> </li>
+	<li><a class="collapsed" href="http://www.labbookpages.co.uk/metalwork.html">Metalwork</a> </li>
+	<li><a class="collapsed" href="http://www.labbookpages.co.uk/misc.html">Miscellaneous</a> </li>
+	<li><a class="collapsed" href="http://www.labbookpages.co.uk/research.html">Research</a> </li>
+	<li><a class="collapsed" href="http://www.labbookpages.co.uk/software.html">Software</a> </li>
+	<li><a class="collapsed" href="http://www.labbookpages.co.uk/teaching.html">Teaching</a> </li>
+	<li><a class="collapsed" href="http://www.labbookpages.co.uk/web.html">Web</a> </li>
+</ul>		</div>
+	</div>
+	
+	<div id="statsBox"><div class="content" style="padding:4px 6px 0px 6px; text-align:center"><p style="margin:0px"><strong>Top 5 Pages this Month</strong></p><table class="topContent" summary="Top Site Content">
+<tbody><tr><th class="label">Page</th><th class="count">Views</th></tr>
+<tr class="odd"><td class="label"><a href="http://www.labbookpages.co.uk/electronics/debounce.html">Switch Debouncing</a></td><td class="count">2302</td></tr>
+<tr><td class="label"><a href="http://www.labbookpages.co.uk/software/imgProc/otsuThreshold.html">Otsu Thresholding</a></td><td class="count">1590</td></tr>
+<tr class="odd"><td class="label"><a href="./FIR Filters by Windowing - The Lab Book Pages_files/FIR Filters by Windowing - The Lab Book Pages.htm">FIR Filters by Windowing</a></td><td class="count">1381</td></tr>
+<tr><td class="label"><a href="http://www.labbookpages.co.uk/audio/javaWavFiles.html">Java Wav File IO</a></td><td class="count">1265</td></tr>
+<tr class="odd"><td class="label"><a href="http://www.labbookpages.co.uk/audio/beamforming/delaySum.html">Delay Sum Beamforming</a></td><td class="count">762</td></tr>
+</tbody></table>
+<p style="margin:0px 0px 5px 0px">See <a href="http://www.labbookpages.co.uk/home/statistics.html">more site statistics</a>.</p></div></div>
+
+	<div class="content">
+		<div class="linkMenu">
+			<div style="float:left"><p class="icon" style="background-image: url(/common/icons/mail.png)"><a href="http://www.labbookpages.co.uk/home/about.html">Contact Details</a></p></div><div style="clear:left"></div>
+			<div style="float:left"><p class="icon" style="background-image: url(/common/icons/find.png)"><a href="http://www.labbookpages.co.uk/home/sitemap.html">Site Map</a></p></div><div style="clear:left"></div>
+		</div>
+	</div>
+
+	<div class="content">
+		<a title="Should be strict XHTML 1.0" href="http://validator.w3.org/check?uri=referer"><img style="padding:0px; margin:2px;" src="./FIR Filters by Windowing - The Lab Book Pages_files/validXHTML.png" alt="Valid XHTML"></a>
+		<a title="Should be valid CSS" href="http://jigsaw.w3.org/css-validator/check/referer"><img style="padding:0px; margin:2px;" src="./FIR Filters by Windowing - The Lab Book Pages_files/validCSS.png" alt="Valid CSS"></a><br>
+		
+		<a title="Valid RSS Feed" href="http://validator.w3.org/feed/check.cgi?url=http%3A//www.labbookpages.co.uk/rss.xml"><img style="padding:0px; margin:2px;" src="./FIR Filters by Windowing - The Lab Book Pages_files/validRSS.png" alt="Valid RSS"></a>
+		<a title="All files editied with VIM" href="http://www.vim.org/"><img style="padding:0px; margin:2px;" src="./FIR Filters by Windowing - The Lab Book Pages_files/vim.png" alt="VIM Powered"></a><br>
+
+		<a type="application/rss+xml" href="http://www.labbookpages.co.uk/rss.xml"><img style="padding:0px; margin:2px;" src="./FIR Filters by Windowing - The Lab Book Pages_files/rss.png" alt="RSS Feed Icon"></a><br>
+
+		<p class="small">This site uses Google Analytics to track visits.
+		<a href="http://www.labbookpages.co.uk/home/privacy.html">Privacy Statement</a></p>
+	</div>
+
+</div>
+
+<div id="mainColumn">
+		<div id="breadcrumb">
+		<p style="float:right"></p>
+		<p>You are here: <a href="http://www.labbookpages.co.uk/audio.html">Audio</a></p>
+	</div>
+	
+	<div id="mainContent" class="content watermarked">
+		<div style="float:left; width:100%;">
+		<img class="pageImage" src="./FIR Filters by Windowing - The Lab Book Pages_files/filter.png" alt="Page Icon">
+<!-- Start Content Section -->
+
+<h1>FIR Filters by Windowing</h1>
+
+<p>The design of FIR filters using windowing is a simple and quick technique. There are many pages
+on the web that describe the process, but many fall short on providing real implementation details.
+Hopefully, this page contains all the required information to put together your own algorithm for
+creating low pass, high pass, band pass and band stop filters based on a number of different
+windows. A complete set of C functions is also provided which can be easily translated to other
+languages if required.</p>
+
+<p>If you just want to see it all working, jump straight to the <a href="http://www.labbookpages.co.uk/audio/firWindowing.html#code">code</a> section. All the data for the graphs
+on this page was generated using this code, then plotted using <a class="ext" href="http://www.gnuplot.info/">gnuplot</a>.</p>
+
+<div class="pageMenu">
+	<ul>
+		<li><a href="http://www.labbookpages.co.uk/audio/firWindowing.html#ideal">Ideal Low Pass Filter Impulse Response</a></li>
+		<li><a href="http://www.labbookpages.co.uk/audio/firWindowing.html#windows">Windowing</a></li>
+		<li><a href="http://www.labbookpages.co.uk/audio/firWindowing.html#high">High Pass, Band Pass and Band Stop Filters</a></li>
+		<li><a href="http://www.labbookpages.co.uk/audio/firWindowing.html#kaiser">The Kaiser Window</a></li>
+		<li><a href="http://www.labbookpages.co.uk/audio/firWindowing.html#code">C Code Implementation</a></li>
+		<li><a href="http://www.labbookpages.co.uk/audio/firWindowing.html#links">Useful Links</a></li>
+	</ul>
+</div>
+
+<div class="hr"></div><hr>
+<!-- ===================================================================================== -->
+
+<h2 id="ideal">Ideal Low Pass Filter Impulse Response</h2>
+
+<p>The frequency response of an ideal low pass filter is shown in the image below. The
+frequency axis is normalised with respect to the sampling frequency. The cut-off, or
+transition frequency (<var>f<sub>t</sub></var>) is always between 0 and 0.5, as 0.5 represents the <a class="ext" href="http://en.wikipedia.org/wiki/Nyquist_frequency">Nyquist frequency</a>. As you would expect
+from a low pass filter, all frequencies below <var>f<sub>t</sub></var> are passed, where-as all those above are
+stopped.</p>
+
+<div class="image" align="center">
+<img src="./FIR Filters by Windowing - The Lab Book Pages_files/lpf.png" alt="Ideal Low Pass Filter">
+</div>
+
+<p>The impulse response of this ideal low pass filter is shown below, it is a sinc function. The
+equation is shown next to the plot. If we could create a filter with this impulse response we would
+have an ideal low pass filter like that shown above. A set of Gnuplot commands are also given for
+recreating this graph.</p>
+
+<table class="imageAlign" summary="Ideal Low Pass Filter and Impulse Response"><tbody><tr>
+<td><div class="image" align="center">
+<img src="./FIR Filters by Windowing - The Lab Book Pages_files/sinc.png" alt="Impulse response of ideal LPF (ft=0.25)">
+<p><span>Impulse response of ideal LPF (ft=0.25)</span></p>
+</div>
+</td>
+<td><div class="image" align="center">
+<img src="./FIR Filters by Windowing - The Lab Book Pages_files/lpfSinc.png" alt="Sinc equation of ideal Low Pass Filter">
+</div>
+</td>
+<td><div class="codeFilename">Gnuplot commands for Impulse Response (ft=0.25)</div>
+<div class="code"><pre>&gt; h(x)=sin(2*pi*0.25*x)/(pi*x)
+&gt; set xrange[-50:50]
+&gt; set yrange[-0.15:0.5]
+&gt; set samples 1000
+&gt; set grid
+&gt; unset key
+&gt; plot h(x)
+</pre></div></td>
+</tr></tbody></table>
+
+<p>Below is a plot of impulse responses for different values of <var>f<sub>t</sub></var>.</p>
+
+<table class="imageAlign" summary="Ideal Low Pass Filter Impulse Response set"><tbody><tr>
+<td><div class="image" align="center">
+<img src="./FIR Filters by Windowing - The Lab Book Pages_files/sincSet.png" alt="Sinc function for different values of normalised transition frequency">
+<p><span>Sinc function for different values of normalised transition frequency</span></p>
+</div>
+</td>
+<td><div class="codeFilename">Gnuplot commands</div>
+<div class="code"><pre>&gt; h(x)=sin(2*pi*ft*x)/(pi*x)
+&gt; set xrange[-20:20]
+&gt; set samples 1000
+&gt; set grid lt rgbcolor "#BBBBBB"
+&gt; plot ft=0.1, h(x) t "ft=0.1", \
+&gt;  ft=0.25, h(x) t "ft=0.25", \
+&gt;  ft=0.4, h(x) t "ft=0.4"
+</pre></div></td>
+</tr></tbody></table>
+
+<p>Unfortunately it is not as easy as that. Given the non-recursive filter structure like that shown
+below, there are two problems with creating this ideal impulse response.</p>
+
+<ul>
+<li>First, the sinc function is infinite in the x direction, the ripples keep on going in both
+directions. However, the FIR filter only allows us to create finite impulse responses, the number
+of filter taps must be finite.</li>
+
+<li>Second, the impulse response is non-casual, this means an implementation would require samples from the future.</li>
+</ul>
+
+<div class="image" align="center">
+<img src="./FIR Filters by Windowing - The Lab Book Pages_files/fir.png" alt="Non-Recursive, Finite Impulse Response Filter">
+<p><span>Non-Recursive, Finite Impulse Response Filter</span></p>
+</div>
+
+<p>Luckily, the solutions to these issues are quite simple. First, a window is applied to the sinc
+function such that only a portion of the impulse response is actually used. Secondly, the impulse
+response is shifted such that the filter only operates on available samples (those from the past).
+These techniques are demonstrated in the the following example.</p>
+
+<h3>Low Pass Filter Example</h3>
+
+<div class="image" style="float:right;padding-left:10px;" align="center">
+<img src="./FIR Filters by Windowing - The Lab Book Pages_files/weights.png" alt="Filter weights M=20, ft=0.23">
+<p><span>Filter weights M=20, ft=0.23</span></p>
+</div>
+
+<p>Consider the filter with the properties given below.</p>
+<ul>
+	<li><strong>Filter Type:</strong> Low Pass</li>
+	<li><strong>Sampling Frequency:</strong> 2000 Hz</li>
+	<li><strong>Cut off Frequency:</strong> 460 Hz</li>
+	<li><strong>Filter Length (# weights):</strong> 21</li>
+</ul>
+
+<p>The plot to the right shows the filter weights that have been calculated using the equations below.</p>
+
+<ul>
+	<li><strong><var>M</var> - </strong>This is the filter order, it is always equal to the number of taps minus 1</li>
+	<li><strong><var>f<sub>t</sub></var> - </strong>This is the normalised transition frequency.</li>
+</ul>
+
+<p>There are 21 weights that fit on the ideal impulse response curve. It can be seen how the impulse
+response is effectively cropped by only using 21 weights.</p>
+
+<p><strong>Note:</strong> When calculating weight values with an odd number of weights,
+a divide by zero will occur at <var>n=M/2</var>. Therefore, based on l'Hôpital's rule, the value of <var>2f<sub>t</sub></var> is used.</p>
+
+<div class="image" align="center">
+<img src="./FIR Filters by Windowing - The Lab Book Pages_files/example1.png" alt="Finite Impulse Response Filter">
+</div>
+
+<br clear="all">
+
+<p>The actual weight values are:</p>
+
+<table class="grid-horiz centre" summary="weights">
+<tbody><tr><th>Weight #, n</th><td>0, 20</td><td>1, 19</td><td>2, 18</td><td>3, 17</td><td>4, 16</td><td>5, 15</td><td>6, 14</td><td>7, 13</td><td>8, 12</td><td>9, 11</td><td>10</td></tr>
+<tr><th>Weight Value w(n)</th><td>0.030273</td><td>0.015059</td><td>-0.033595</td><td>-0.028985</td><td>0.036316</td><td>0.051504</td><td>-0.038337</td><td>-0.098652</td><td>0.039580</td><td>0.315800</td><td>0.460000</td></tr>
+</tbody></table>
+
+<p>The frequency response for the filter is shown below. It can clearly be seen that the transition
+frequency occurs at the correct point, 460 Hz.</p>
+
+<div class="image" align="center">
+<img src="./FIR Filters by Windowing - The Lab Book Pages_files/example1(1).png" alt="Example Frequency response">
+</div>
+
+<p>The large amount of ripple visible on the non-dB plot is due to the rather crude approach of
+truncating the infinite ideal impulse response. The approach that has just been used is called applying a
+<strong>Rectangular Window</strong>. The next section describes different window types that can
+decrease the ripple and improve the attenuation of the stop band.</p>
+
+<div class="hr"></div><hr>
+<!-- ===================================================================================== -->
+
+<div class="image" style="float:right;padding-left:10px;" align="center">
+<img src="./FIR Filters by Windowing - The Lab Book Pages_files/windowingProcess.png" alt="Windowing Process">
+</div>
+
+<h2 id="windows">Windowing</h2>
+
+<p>Applying a window to the sinc function weights provides extra control over the characteristics of the filter. The image
+to the right illustrates the process.</p>
+
+<p>First, the normal sinc weights are calculated as described above. Then the window weights are calculated,
+in this case a Hamming Window has been used, the equation is below. The two sets of weights are multiplied together
+to create the final set of filter weights.</p>
+
+<div class="image" align="center">
+<img src="./FIR Filters by Windowing - The Lab Book Pages_files/hamming.png" alt="Hamming Windowing Equation">
+<p><span>Hamming Windowing Equation</span></p>
+</div>
+
+<p>Once again, <var>M</var> is the order of the filter, which is equal to the filter length - 1.</p>
+
+<br clear="all">
+
+<p>The plots below show the effect on the filter's frequency response before applying the Hamming Window (<span style="color:green">green</span>) and after (<span style="color:red">red</span>). The
+trick is to select the window type and filter length that will give a filter with the correct rate
+of roll-off and level of attenuation in the stop band.</p>
+
+<div class="image" align="center">
+<img src="./FIR Filters by Windowing - The Lab Book Pages_files/windowed.png" alt="Example Frequency response after Windowing">
+</div>
+
+<h3>Different Windows</h3>
+
+<p>The table below gives the equations for different window types.</p>
+
+<table class="centre grid" summary="Window Types">
+<tbody><tr><th>Window Type</th><th>Weight Equation</th></tr>
+<tr><td>Rectangular</td><td><img src="./FIR Filters by Windowing - The Lab Book Pages_files/rectangular.png" alt="Rectangular Window Equation"></td></tr>
+<tr><td>Bartlett</td><td><img src="./FIR Filters by Windowing - The Lab Book Pages_files/bartlett.png" alt="Bartlett Window Equation"></td></tr>
+<tr><td>Hanning</td><td><img src="./FIR Filters by Windowing - The Lab Book Pages_files/hanning.png" alt="Hanning Window Equation"></td></tr>
+<tr><td>Hamming</td><td><img src="./FIR Filters by Windowing - The Lab Book Pages_files/hamming.png" alt="Hamming Window Equation"></td></tr>
+<tr><td>Blackman</td><td><img src="./FIR Filters by Windowing - The Lab Book Pages_files/blackman.png" alt="Blackman Window Equation"></td></tr>
+</tbody></table>
+
+<p>The image below shows the effect of different windows on the frequency response of a 28th Order
+(29 weights) low pass filter, with a cut-off frequency of 5000Hz and sampling frequency of 44100Hz.</p>
+
+<div class="image" align="center">
+<img src="./FIR Filters by Windowing - The Lab Book Pages_files/windowTypes.png" alt="Frequency Response and Weight Values of different windows types">
+<p><span>Frequency Response and Weight Values of different windows types</span></p>
+</div>
+
+<div class="hr"></div><hr>
+<!-- ===================================================================================== -->
+
+<h2 id="high">High Pass, Band Pass and Band Stop Filters</h2>
+
+<div class="image" style="float:right;padding-left:10px;" align="center">
+<img src="./FIR Filters by Windowing - The Lab Book Pages_files/hpBlock.png" alt="High Pass Filter from All Pass and Low Pass Filters">
+</div>
+
+<p>The high pass filter is made up from a low pass and an all pass filter. The image to the right
+demonstrates how this works. If you take an all pass filter and subtract the output of the low pass,
+you are left with a high pass filter.</p>
+
+<p>The all pass filter is of the same order as the low pass filter. All the weight values
+are 0.0 apart from the centre weight which has a value 1.0. <strong>Note:</strong> This places the
+constraint that when creating a high pass filter in this way, the order must be even (an odd number
+of taps).</p>
+
+<p>The equation for calculating the weights (before windowing) is shown below. Comparing this
+equation with the low pass filter it is easy to see the subtraction and the all pass filter's single 1.0
+weight applied in the case of <var>n=M/2</var>. Windows are applied in exactly the same way as with the low
+pass filter.</p>
+
+<div class="image" align="center">
+<img src="./FIR Filters by Windowing - The Lab Book Pages_files/hpf.png" alt="High Pass Filter Sinc Equation">
+</div>
+
+<p>Below is a Low Pass and High Pass filter frequency response with the same transition frequency.</p>
+
+<div class="image" align="center">
+<img src="./FIR Filters by Windowing - The Lab Book Pages_files/highPassLowPass.png" alt="High Pass and Low Pass Filter Frequency Responses">
+</div>
+
+<br clear="all">
+
+<p>The band stop and band pass are achieved in a similar way. The equations for calculating the
+weights are shown below. For both band pass and band stop, the filter order needs to be even (an odd
+filter length). Once again, windows are applied across the weights as before.</p>
+
+<div class="image" align="center">
+<img src="./FIR Filters by Windowing - The Lab Book Pages_files/bp.png" alt="Band Pass Filter Sinc Equation">
+</div>
+<div class="image" align="center">
+<img src="./FIR Filters by Windowing - The Lab Book Pages_files/bs.png" alt="Band Stop Filter Sinc Equation">
+</div>
+
+<div class="image" align="center">
+<img src="./FIR Filters by Windowing - The Lab Book Pages_files/bandStopBandPass.png" alt="Band Pass and Band Stop Filter Frequency Responses">
+</div>
+
+<div class="hr"></div><hr>
+<!-- ===================================================================================== -->
+
+<h2 id="kaiser">The Kaiser Window</h2>
+
+<p>The Kaiser Window is specified differently to the previous windows. Rather than
+specifying the filter order, the amount of ripple and the transition band width are specified. The
+image below shows the meaning of these two parameters.</p>
+
+<div class="image" align="center">
+<img src="./FIR Filters by Windowing - The Lab Book Pages_files/kaiser.png" alt="Kaiser Window Calculation">
+</div>
+
+<p>Once you have decided on the amount of ripple and transition width, using the equations below you
+can calculate the values for <var>A</var> and <var>tw</var>. These values can be used to
+calculate the filter order, <var>M</var> and a further parameter, <var>β</var>. In these equations the
+transition width and sampling frequency are in Hz.</p>
+
+<table class="imageAlign" summary="Kaiser Window Parameter Equations"><tbody><tr>
+<td><div class="image" align="center">
+<img src="./FIR Filters by Windowing - The Lab Book Pages_files/kaiser-A-tw.png" alt="Kaiser Window Parameter Equations 1">
+</div>
+</td>
+<td><div class="image" align="center">
+<img src="./FIR Filters by Windowing - The Lab Book Pages_files/kaiser-M-B.png" alt="Kaiser Window Parameter Equations 2">
+</div>
+</td>
+</tr></tbody></table>
+
+<p>Once you have values for <var>M</var> and <var>β</var>, you can finally calculate the actual window weights. The
+Kaiser window equation makes use of another function I<sub>0</sub>, this is a Zeroth Order Modified
+Bessel Function. Although it expands to infinity, the denominator quickly becomes very large,
+therefore you only really need to calculate I<sub>0</sub>(x) up to around i=20.</p>
+
+<table class="imageAlign" summary="Kaiser Window Equations"><tbody><tr>
+<td><div class="image" align="center">
+<img src="./FIR Filters by Windowing - The Lab Book Pages_files/kaiser(1).png" alt="Kaiser Window Equation">
+</div>
+</td>
+<td><div class="image" align="center">
+<img src="./FIR Filters by Windowing - The Lab Book Pages_files/bessel.png" alt="Zeroth Order Modified Bessel Function">
+</div>
+</td>
+</tr></tbody></table>
+
+<p>Below are some examples weights for the following Kaiser Window based low pass filter:</p>
+<ul>
+	<li><strong>Ripple:</strong> 0.01</li>
+	<li><strong>Cut-off Frequency:</strong> 250Hz</li>
+	<li><strong>Transition Window:</strong> 100Hz</li>
+	<li><strong>Sampling Frequency:</strong> 1000Hz</li>
+	<li><strong>Filter Order, <var>M</var>:</strong> 23</li>
+	<li><strong>Beta:</strong> 3.395321</li>
+</ul>
+
+<table class="grid-horiz centre" summary="weights">
+<tbody><tr>
+	<th>Weight #, n</th>
+	<td>0, 23</td><td>1, 22</td><td>2, 21</td><td>3, 20</td><td>4, 19</td><td>5, 18</td>
+	<td>6, 17</td><td>7, 16</td><td>8, 15</td><td>9, 14</td><td>10, 13</td><td>11, 12</td>
+</tr>
+<tr>
+	<th>Weight Value w(n)</th>
+	<td>-0.002896</td>
+	<td>-0.004885</td>
+	<td>0.007528</td>
+	<td>0.010980</td>
+	<td>-0.015463</td>
+	<td>-0.021317</td>
+	<td>0.029123</td>
+	<td>0.039980</td>
+	<td>-0.056254</td>
+	<td>-0.084142</td>
+	<td>0.146464</td>
+	<td>0.448952</td>
+</tr>
+</tbody></table>
+
+<p>The filter's frequency response is show below, for comparison a Blackman window based filter with
+the same number of weights is also shown. It can be seen that the transition frequency of 250Hz is
+correct, as is the transition width of 100Hz.</p>
+
+<div class="image" align="center">
+<img src="./FIR Filters by Windowing - The Lab Book Pages_files/kaiserFreqResp.png" alt="Kaiser Frequency Response">
+</div>
+
+<h3>Alternate Kaiser Window Equation</h3>
+
+<p>Below is a rearrangement of the Kaiser Window equation.</p>
+
+<div class="image" align="center">
+<img src="./FIR Filters by Windowing - The Lab Book Pages_files/kaiser-alt.png" alt="Alternate Kaiser Window Equation">
+</div>
+
+<div class="hr"></div><hr>
+<!-- ===================================================================================== -->
+
+<h2 id="code">C Code Implementation</h2>
+
+<div class="image" style="float:right;padding-left:10px;" align="center">
+<a href="http://www.fftw.org/"><img src="./FIR Filters by Windowing - The Lab Book Pages_files/fftw-logo.gif" alt="Library Icon">
+</a></div>
+
+<p>An archive containing the source code for demonstrating all the filters and windows is linked to below.</p>
+
+<div style="float:left"><p class="icon" style="background-image: url(/common/icons/tar.png)"><a href="http://www.labbookpages.co.uk/audio/files/firWindowing/firWindowing.tar.gz"><code>firWindowing.tar.gz</code></a></p></div><div style="clear:left"></div>
+
+<p>Simply unpack and make the files as shown below. The <a class="ext" href="http://www.fftw.org/">FFTW</a> fast Fourier transform library is used for generating the filter
+frequency response, this is a very standard library and should be part of any Linux distribution. It
+can also be used with <a class="ext" href="http://www.fftw.org/install/windows.html">Windows</a> and
+<a class="ext" href="http://www.fftw.org/install/mac.html">Mac OS X</a>.</p>
+
+<div class="code"><pre><span class="Statement">&gt;</span> tar -zxf firWindowing.tar.gz
+<span class="Statement">&gt;</span> cd firWindowing
+<span class="Statement">&gt;</span> make
+<span class="Statement">&gt;</span> ./filters
+</pre></div>
+
+<p>This will generate a set of files with extension <code>.dat</code>. These are frequency responses
+of various filters. There is a <a class="ext" href="http://www.gnuplot.info/">gnuplot</a> script to
+display the data as plots.</p>
+
+<div class="code"><pre><span class="Statement">&gt;</span> gnuplot
+gnuplot&gt; load 'filters.gnuplot'
+</pre></div>
+
+<div class="hr"></div><hr>
+<!-- ===================================================================================== -->
+
+<h2 id="links">Useful Links</h2>
+
+<ul>
+<li>This <a class="ext" href="http://www.filter-solutions.com/FIR.html">page</a> has a good set of plots
+for the frequency responses of different window types.</li>
+<li>A similar page to this, <a class="ext" href="http://www.vocw.edu.vn/content/m11285/latest/">FIR filter design: The 
+window design method</a>.</li>
+</ul>
+
+<div class="hr"></div><hr>
+<!-- ===================================================================================== -->
+
+<!-- End Content Section -->	
+		
+		</div>
+
+		<div align="center">
+			<img src="./FIR Filters by Windowing - The Lab Book Pages_files/smallBook.png" alt="Book Logo">
+		</div>
+
+	</div>	<!-- End mainContent -->
+</div>		<!-- End mainColumn -->
+
+</div>		<!-- End mainSection -->
+
+<!--<div id="linkBar">
+	<a href="#"><img src="/common/images/top.png" alt="Top of Page" /></a><br />
+	<a href="/index.html"><img src="/common/images/home.png" alt="Home" /></a><br />
+	<a href="/home/about.html"><img src="/common/images/email.png" alt="Contact Details" /></a><br />
+</div>-->
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./FIR Filters by Windowing - The Lab Book Pages_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-2171818-4");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+
+</body></html>

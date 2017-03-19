@@ -1,0 +1,5 @@
+replacing int with float: 11882 cycles
+with int: 11228 cycles
+replacing short with float: 12890 cycles
+
+We deal with a fixed-point hardware, that means that floating-point operations are emulated in software. Moreover, the memory acces latency comes into discussion: because float variables are allocated much more memory than integer variables, the operations with float data types are slower than the integer ones.

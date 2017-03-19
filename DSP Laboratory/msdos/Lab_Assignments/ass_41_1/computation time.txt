@@ -1,0 +1,4 @@
+DIF FFT: 269375 cycles
+DFT: 896391 cycles
+
+so the FFT is 3.32 times faster than the DFT (for N=8, we have the ratio of complexities N^2/NldN, so 64/24 = 2.66)

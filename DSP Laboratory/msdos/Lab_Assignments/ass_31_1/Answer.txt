@@ -1,0 +1,1 @@
+I observe a 4Khz output because of downsampling with a factor of two, the sampling frequency in this case is 8 Khz.

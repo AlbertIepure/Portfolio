@@ -1,0 +1,165 @@
+%% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+%% Hauptdatei, Wurzel des Dokuments
+%% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+%
+%
+
+% Headerfeld, Typ des Dokumentes, einzubindende Packages.
+% Hier bei Bedarf Änderungen vornehmen.
+\documentclass
+[   twoside=false,     % Einseitiger oder zweiseitiger Druck?
+    fontsize=12pt,     % Bezug: 12-Punkt Schriftgröße
+    DIV=15,            % Randaufteilung, siehe Dokumentation "KOMA"-Script
+    BCOR=0mm,         % Bindekorrektur: Innen 17mm Platz lassen. Copyshop-getestet.
+%    headsepline,
+    headsepline,  % Unter Kopfzeile Trennlinie (aus: headnosepline)
+    footsepline,  % Über Fußzeile Trennlinie (aus: footnosepline)
+    open=right,        % Neue Kapitel im zweiseitigen Druck rechts beginnen lassen
+    paper=a4,          % Seitenformat A4
+    abstract=true,     % Abstract einbinden
+    listof=totoc,      % Div. Verzeichnisse ins Inhaltsverzeichnis aufnehmen
+    bibliography=totoc,% Literaturverzeichnis ins Inhaltsverzeichnis aufnehmen
+    titlepage,         % Titelseite aktivieren
+    headinclude=true,  % Seiten-Head in die Satzspiegelberechnung mit einbeziehen
+    footinclude=false, % Seiten-Foot nicht in die Satzspiegelberechnung mit einbeziehen
+    numbers=noenddot   % Gliederungsnummern ohne abschließenden Punkt darstellen
+]   {scrreprt}         % Dokumentenstil: "Report" aus dem KOMA-Skript-Paket
+	
+\usepackage{etoolbox}
+\usepackage[active]{srcltx}
+%\usepackage[activate=normal]{pdfcprot} % Optischer Randausgleich -> pdflatex!
+\usepackage{ifthen}
+\usepackage[english]{babel}   % Neue Deutsche Rechtschreibung
+%\usepackage[latin1]{inputenc} % Zeichencodierung nach ISO-8859-1
+\usepackage[utf8]{inputenc}   %	Zeichencodierung nach UTF-8 (Unicode)
+\usepackage[T1]{fontenc}
+%\usepackage{ae} % obsolet und durch lmodern ersetzt
+\usepackage{lmodern}
+\usepackage[T1]{url}  
+\usepackage[final]{graphicx}
+\usepackage[automark]{scrpage2}
+\usepackage{setspace}
+%\usepackage[first,light]{draftcopy} % Für Probedruck
+\usepackage[plainpages=false,pdfpagelabels,hypertexnames=false]{hyperref}
+\usepackage{pdfpages}
+\usepackage{array}
+\usepackage{amssymb}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{breakurl}
+\usepackage{booktabs}
+\usepackage{fancyvrb}
+\usepackage{amsmath}
+\usepackage{setspace}
+%\usepackage{times}
+\usepackage{eurosym}
+
+
+% Tiefe der Kapitelnummerierung beeinflussen
+\setcounter{secnumdepth}{3} % Tiefe der Nummerierung
+\setcounter{tocdepth}{3}    % Tiefe des Inhaltsverzeichnisses
+
+
+% Hier in die zweite geschweifte Klammer jeweils
+% die persönlichen Daten und das Thema der Arbeit eintragen:
+\newcommand{\artderausarbeitung}{}
+\newcommand{\namedesautors}{Wernecke, Luise, Student ID: 03645807}
+\newcommand{\themaderarbeit}{Optimierung der Informationsverteilung für Car-2-X-Kommunikation}
+
+% PDF Metadaten definieren
+\hypersetup{
+   pdftitle={\themaderarbeit},
+   pdfsubject={\artderausarbeitung},
+   pdfauthor={\namedesautors},
+   pdfkeywords={\artderausarbeitung; TU-Ilmenau; Kommunikationsnetze;}}
+
+
+% Abkürzungsverzeichnis beeinflussen. Hier nichts ändern!
+\usepackage[intoc]{nomencl}
+  \let\abbrev\nomenclature
+  \renewcommand{\nomname}{Abkürzungsverzeichnis und Formelzeichen}
+  \setlength{\nomlabelwidth}{.25\hsize}
+  \renewcommand{\nomlabel}[1]{#1 \dotfill}
+  \setlength{\nomitemsep}{-\parsep}
+  \makenomenclature
+\usepackage[normalem]{ulem}
+  \newcommand{\markup}[1]{\textbf{#1}}
+
+% Seitenlayout festlegen. Hier nichts ändern!
+\pagestyle{scrplain}
+\ihead[]{}
+\ohead[]{}
+\chead[]{}
+\ifoot[]{ \pagemark}
+\ofoot[]{\footnotesize  \namedesautors }
+\cfoot[]{}
+\textwidth = 159mm
+
+\renewcommand{\titlepagestyle}{scrheadings}
+\renewcommand{\partpagestyle}{scrheadings}
+\renewcommand{\chapterpagestyle}{scrheadings}
+\renewcommand{\indexpagestyle}{scrheadings}
+
+% Abschnittsweise Nummerierung anstatt fortlaufend. Hier nichts ändern!
+\makeatletter
+\@addtoreset{equation}{chapter}
+\@addtoreset{figure}{chapter}
+\@addtoreset{table}{chapter}
+%\renewcommand\theequation{\thechapter.\@arabic\c@equation}
+%\renewcommand\thefigure{\thechapter.\@arabic\c@figure}
+%\renewcommand\thetable{\thechapter.\@arabic\c@table}
+%\makeatother
+
+% Quelltextrahmen, klein. Hier nichts ändern!
+\newsavebox{\inhaltkl}
+\def\rahmenkl{\sbox{\inhaltkl}\bgroup\small\renewcommand{\baselinestretch}{1}\vbox\bgroup\hsize\textwidth}
+\def\endrahmenkl{\par\vskip-\lastskip\egroup\egroup\fboxsep3mm%
+\framebox[\textwidth][l]{\usebox{\inhaltkl}}}
+
+% Quelltextrahmen, normale Groesse. Hier nichts ändern!
+\newsavebox{\inhalt}
+\def\rahmen{\sbox{\inhalt}\bgroup\renewcommand{\baselinestretch}{1}\vbox\bgroup\hsize\textwidth}
+\def\endrahmen{\par\vskip-\lastskip\egroup\egroup\fboxsep3mm%
+\framebox[\textwidth][l]{\usebox{\inhalt}}}
+
+% Trennvorschläge für falsch getrennte Wörter.
+% Wird häufig bei eingedeutschen Wörtern benötigt, da LaTeX hierbei
+% gerne falsch trennt. Alternativ kann auch im Fliesstext ein
+% Trennvorschlag per "\-" hinterlegt werden, bspw.:
+% Die Hard\-ware besteht aus A und B.
+
+
+
+% Sonstige Befehlsdefinitionen hier ablegen.
+\newcommand{\entspricht}{\stackrel{\wedge}{=}}
+
+\begin{document}
+\onehalfspacing
+
+\title{\LARGE Digital Signal Processing Laboratory \\  Project1: Time-Delay estimation in GNSS \\ Lab Report }
+\author{\large Luise Wernecke \\  \large Student ID: 03645807\\ \large Master of Electrical and Information Engineering}
+\date{\large 26.05.2014}
+
+\maketitle
+
+
+% Die einzelnen Kapitel
+\begingroup
+\let\clearpage\relax
+
+\pagenumbering{arabic}
+\pagestyle{scrheadings}
+\input{kapitel1.tex}
+
+
+\newpage
+%% Literaturverzeichnis einbinden
+%\input{anhang_literaturverzeichnis.tex}
+%
+%% Abbildungsverzeichnis einbinden
+%\input{anhang_abbildungsverzeichnis.tex}
+
+
+\endgroup
+\end{document}
+

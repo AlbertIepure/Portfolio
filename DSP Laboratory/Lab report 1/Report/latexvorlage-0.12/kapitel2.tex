@@ -1,0 +1,29 @@
+%% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+%% Kapitel 2: Car-2-X Kommunikation
+%% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+\chapter{\label{text:Kap2}Implementation of Measurements}
+To implement such a program for measuring the bottleneck link rate, I created a console application project in Visual Studio 2010. The programming language is C++. For that reason I added the given data connectsock.cpp, helpers.cpp and helpers.h to my project, which are also written in C++. The programming code of the measurement is located in the \emph{void main()} in \emph{MC\_Task1.cpp}.
+
+The \emph{main()} contains lots of output\textbackslash input console requests, like asking the user about the packet size to use. This is implemented with the commands \emph{cout}, \emph{\_getch()} and \emph{cin}. All together the \emph{main()} is divided into seven goto identifiers. From top down they are:
+
+\begin{enumerate}
+\item CONNECT: The program requests to connect to the server with a console output to the user.
+
+\item KUFSTEIN: An udp connection between the home computer and kufstein is built with \emph{sock = connectsock("'129.187.223.200"',"'2000"',"'udp"')}.
+
+\item TEST: To check connection reliability a TEST message is sent to the server with \emph{send(sock, outBuf, 800,0)} and is received with \emph{recv(sock, inBuf, 1500, 0)}. Also there exists a timeout function, which will be explained later. After a successful test sending and receiving a new text file with the name \emph{Capacity.txt} is generated.
+
+\item MEASUREMENT\_REQUEST: The program requests the user if he would like to do another measurement.
+
+\item MEASUREMENT: The user is asked about the amount of bytes. The answer will be written in the value byte. Afterwards, a \emph{for} loop of 200 times is started.
+
+\item REPETITION: This is the recording part. Therefore two packets are sent. After the first receiving, one time measurement, and after the second receiving another time measurement are recorded. Both times are implemented with \emph{msec()}. For each loop the capacity is calculated by $capacity =\frac{8 \ast byte}{time\_measure}$ where $time\_measure$ is the difference between the two times. Afterwards, the capacity is written into the file. If there is one timeout, the complete process from REPETITION will be repeated. After the 200 loops are finished, the program jumps to MEASUREMENT\_REQUEST to make another measurement.
+
+\item EXIT: If a question is answered with \emph{N}, the program will jump to this point. Here, the written text file will be closed and the program will be terminated.
+\end{enumerate}
+
+As forehere described, a timeout function exists. It is necessary due to the unsecure UDP connection. Some packets could get lost and the client will wait for packets from the server until some are received. Consequently in case of packet loss, it will wait forever.  Especially if the computer is connected via a wireless LAN network, there are  a lot of disruptions. This timeout function is located outside the \emph{main()} part. It is declared as \emph{bool readable(SOCKET socket)} and uses the Windows’ \emph{TIMEVAL} value to get a timeout. This bool value checks the connection to the server. If it does not receive any answer from the server after two seconds, the returned value will be false. Therefore the problem of nothing received can be detected.
+
+The executable file of this program is a console window. Here the program guides the user through the measurements and gives him some choices, like the byte value or how many measurements he likes to do. If he gives an invalid input, he has to repeat it. Every measurement is saved into the Capacity.txt file consecutively. 

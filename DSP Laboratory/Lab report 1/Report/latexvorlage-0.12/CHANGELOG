@@ -1,0 +1,141 @@
+Changelog LaTeX-Vorlage FG Kommunikationsnetze, TU Ilmenau
+Verantwortlich: Dipl.-Ing. Karsten Renhak (KR)
+Vormals: Dr.-Ing. Florian Evers (FE)
+http://www.tu-ilmenau.de/kn
+
+12.10.2012: Version 0.12
+------------------------
+Changes:
+* Bilder aktualisiert
+* Hinweis auf UTF8-Problem mit TeXnicCenter Version 1.*
+* TeXworks Editor hinzugefügt
+* Inhalt etwas aufräumt
+* Einträge im Literaturverzeichnis geprüft und an alphadin-Style angepasst
+TODOs:
+* weitere Altlasten entfernen
+
+
+27.10.2011: Version 0.11
+------------------------
+Changes:
+* Zeichencodierung der tex-Dateien in UTF8 gewandelt und Master-tex-Datei entsprechend angepasst (KR)
+* LaTeX-Warnungen zu veralteten Paketen entfernt: durch neuen Syntax ersetzt (KR)
+TODOs:
+* Inhalt aufräumen und von Altlasten säubern (DVI->PS), Abbildungen können auch direkt
+  als png oder jpeg in die pdf-Datei eingebunden werden
+* unter Windows mit TeXnicCenter testen (Stichwort UTF8)
+
+07.09.2006: Version 0.10
+------------------------
+Features:
+* Hinweis: Englischer Abstact für Diplomarbeiten
+* Hinweis: Einzüge nicht verändern
+* Hinweis: BibTeX "and" bei mehreren Autoren
+Changes:
+* Das nomencl-Paket wurde auf Version 4.2 angehoben. Beide Dateien
+  (nomencl.ist und nomencl.sty) liegen dam Paket bei, um eventuelle
+  Versionskonflikte mit alten Installationen (speziell bei Linux)
+  zu verhindern.
+  Dadurch änderten sich die Vorlage geringfügig: Die zwei
+  "*glossary"-Kommandos wurden durch die neuen "*nomenclature"-Kommandos
+  ersetzt.
+  Entsprechende Hinweise in der FAQ-Sektion hinzugefügt.
+TODOs:
+* HowTo schreiben um A3-Seiten in das fertige PDF einzubinden
+(FE)
+
+27.03.2006: Version 0.9
+-----------------------
+Features:
+* Hinweise zur automatischen Randaufteilung beim doppelseitigen Druck.
+  Sorgte manchmal für Verwirrung.
+* Hinweise zur Verwendung von überlangen Überschriften. Umbrüche sind
+  im Inhaltsverzeichnis und im Seitenkopf nicht erwünscht, daher gibt
+  es ab sofort ein Beispiel mit Ersatz-Kurzversionen von Überschriften.
+Changes:
+* Bindekorrektur BCOR von 10mm auf 17mm erhöht. Wurde an einer im Copyshop
+  gedruckten Diplomarbeit nachgemessen, passt jetzt genau.
+* Der untere weiße Rand wurde verkleinert, jetzt passt etwas mehr Text auf
+  die Seiten. Nebenbei ist dadurch der obere Rand genauso hoch wie der Untere.
+* Die "pointednumbers"-Option ist wieder rausgeflogen und wurde durch die
+  "pointlessnumbers"-Option ersetzt. Damit weisen die Kapitel- und Grafik-/Tabellen-
+  Nummerierungen keinen abschließenden Punkt mehr auf. Das war gerade bei den
+  Bildunterschriften unerwünscht, da auf den letzten Punkt gleich ein Doppelpunkt
+  folgte:  "Tabelle 3.3.: Beispiel" -> "Tabelle 3.3: Beispiel"
+(FE)
+
+19.01.2006: Version 0.8
+-----------------------
+Features:
+* Unterstützung von beidseitig ausgedruckten Ausarbeitungen.
+  Spart eine Menge Papier, muss aber vom Prüfungsamt
+  genehmigt sein!
+  -> Noch experimentell!
+     * Unbedingt auf die Kopfzeilen achten, ob auch alles passt!
+     * Beim Druck darauf achten, dass die Blätter richtigrum
+       bedruckt werden und nicht der Innenrand aussen ist!
+* Externes Thesenblatt hinzugefügt.
+  Das zweite "Hauptdokument" thesen-handout.tex erzeugt
+  aus der thesen.tex ein eigenständiges Dokument zum Ausdruck
+  für die Endverteidigung. Vorteil: Mittige Anordnung und keine
+  Seitenzahlen.
+* Viele LaTeX-bezogene Hinweise in Kapitel 3 hinzugefügt.
+Changes:
+* Kopfzeile: "Kapitel 3. Beispiel" in "3. Beispiel" geändert.
+  Danke an Oliver Fügen für den Verbesserungsvorschlag!
+* Das "fancyhdr"-Paket ist komplett rausgeflogen und wurde
+  durch das KOMA-Skript-eigene "scrpage2" ersetzt.
+* Bindekorrektur eingeführt. Muss ggf. angepasst werden, steht
+  momentan auf zusätzlicher Innenrand=10mm.
+* Auf der Kurzfassung/Abstact-Seite fehlt jetzt die Fusszeile.
+  Mal schauen ob ich das so lasse...
+* Weiteres Aufzählungs-Beispiel: Description-Umgebung hinzugefügt.
+Bugfixes:
+* Auf manchen Installationen liegt eine neuere Version des
+  "nomencl"-Paketes (Für das Abkürzungsverzeichnis) vor, bei
+  der sich zwei Befehle geändert haben.
+  \makeglossary  -> \makenomenclature
+  \printglossary -> \printnomenclature
+  Vorläufige Lösung: Um bestmögliche Kompatibilität zwischen alten
+  und neuen Installationen zu bieten, liegen dieser Vorlage nun die
+  beiden Dateien des alten "nomencl"-Paketes bei. Dadurch sollte
+  es keine Probleme mehr beim LaTeX-Durchlauf geben.
+  Danke an Josa Eberle und Marco Kramer für den Tipp!
+(FE)
+
+06.10.2005: Version 0.7
+-----------------------
+Bugfixes:
+* Neue deutsche Rechtschreibung: ngerman statt german
+* Weitere Bugs bezüglich hyperref behoben: Die Verwendung einer
+  weiteren hyperref-Option macht zudem die \thepage-Redefinitonen
+  überflüssig.
+* "pointednumbers" als zusätzliche Dokumentenoption gesetzt
+(FE)
+
+13.09.2005: Version 0.6
+-----------------------
+Bugfixes:
+* Fehlermeldungen durch hyperref-Paket bei Benutzung von
+  Pdflatex beseitigt. Seitenkennungen "\thepage" waren nicht
+  eindeutig.
+* Seiten, auf denen Kapitel "chapter" starten, hatten keine
+  Kopf- bzw. Fusszeile. Behoben.
+Changes:
+* Wieder \include in \input geändert. \include erzeugte immer
+  eine neue Seite, was im Anhang nicht gut aussah.
+(FE)
+
+19.08.2005: Version 0.5
+-----------------------
+Features:
+* Hyperref-Paket eingebunden
+(FE)
+
+19.08.2005: Version 0.4
+-----------------------
+Features:
+* Umstellung von scrartcl auf scrreprt.
+  Noch ein paar Kleinigkeiten zu verbessern...!
+(FE)
+

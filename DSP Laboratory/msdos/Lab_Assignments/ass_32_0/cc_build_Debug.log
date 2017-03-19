@@ -1,0 +1,17 @@
+----------------------------  dsp_lab.pjt - Debug  ----------------------------
+[c6416dskinit.c] "C:\CCStudio_v3.3\C6000\cgtools\bin\cl6x" -g -fr"H:/msdos/Lab_Assignments/ass_32_0/Debug" -i"C:/CCStudio_v3.3/C6000/dsk6416/include" -d"CHIP_6416" -mv6400 --mem_model:data=far -@"H:/msdos/Lab_Assignments/ass_32_0/Debug.lkf" "c6416dskinit.c"
+
+[Vectors_poll.asm] "C:\CCStudio_v3.3\C6000\cgtools\bin\cl6x" -g -fr"H:/msdos/Lab_Assignments/ass_32_0/Debug" -i"C:/CCStudio_v3.3/C6000/dsk6416/include" -d"CHIP_6416" -mv6400 --mem_model:data=far -@"H:/msdos/Lab_Assignments/ass_32_0/Debug.lkf" "Vectors_poll.asm"
+
+[dsp_lab.c] "C:\CCStudio_v3.3\C6000\cgtools\bin\cl6x" -g -fr"H:/msdos/Lab_Assignments/ass_32_0/Debug" -i"C:/CCStudio_v3.3/C6000/dsk6416/include" -d"CHIP_6416" -mv6400 --mem_model:data=far -@"Debug.lkf" "dsp_lab.c"
+
+[FIR.c] "C:\CCStudio_v3.3\C6000\cgtools\bin\cl6x" -g -fr"H:/msdos/Lab_Assignments/ass_32_0/Debug" -i"C:/CCStudio_v3.3/C6000/dsk6416/include" -d"CHIP_6416" -mv6400 --mem_model:data=far -@"Debug.lkf" "FIR.c"
+
+[Linking...] "C:\CCStudio_v3.3\C6000\cgtools\bin\cl6x" -@"Debug.lkf"
+<Linking>
+>> warning: creating .stack section with default size of 400 (hex) words.
+   Use
+            -stack option to change the default size.
+
+Build Complete,
+  0 Errors, 1 Warnings, 0 Remarks.

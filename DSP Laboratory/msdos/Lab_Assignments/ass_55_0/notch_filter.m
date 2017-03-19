@@ -1,0 +1,10 @@
+clear all;
+close all;
+clc;
+omega_zero = pi/4;
+r = 1;
+z = exp(1i*pi);
+b0 = power(abs(1 - 2*r*cos(omega_zero) * power(z,-1) + power(r,2) * power(z,-2)),-1);
+% frequency_response(b0 * [1, -2*r*cos(omega_zero), power(r,2)],1);
+fvtool(b0 * [1, -2*r*cos(omega_zero), power(r,2)],1);
+saveas(gcf,'results.jpg');
