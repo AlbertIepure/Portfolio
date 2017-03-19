@@ -1,0 +1,1 @@
+extern Word16 signalenergy(Word16 *x);
