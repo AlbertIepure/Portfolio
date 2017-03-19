@@ -1,0 +1,1 @@
+am updatat fisierul .hex (de fapt el exista in folderul "avrgcc2/debug", dar banui ca nu l-ai luat pe ala care trebuie si d-aia ai obtinut bare ciudate.. acum ar trebui sa iti afiseze 8-uri pe fiecare display, poti verifica astfel conexiunile intre segmente : ) 
