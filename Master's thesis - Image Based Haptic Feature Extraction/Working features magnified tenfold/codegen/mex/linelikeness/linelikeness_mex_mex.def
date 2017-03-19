@@ -1,0 +1,10 @@
+LIBRARY linelikeness_mex.mexw64
+EXPORTS
+mexFunction
+emlrtMexFcnProperties
+linelikeness
+emxFree_real_T
+emxInit_real_T
+linelikeness_initialize
+linelikeness_terminate
+linelikeness_atexit

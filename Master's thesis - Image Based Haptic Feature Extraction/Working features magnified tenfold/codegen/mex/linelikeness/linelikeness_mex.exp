@@ -1,0 +1,9 @@
+linelikeness_mex.mexw64
+emlrtMexFcnProperties		emlrtMexFcnProperties
+emxFree_real_T		emxFree_real_T
+emxInit_real_T		emxInit_real_T
+linelikeness		linelikeness
+linelikeness_atexit		linelikeness_atexit
+linelikeness_initialize		linelikeness_initialize
+linelikeness_terminate		linelikeness_terminate
+mexFunction		mexFunction
