@@ -1,0 +1,12 @@
+http://stats.stackexchange.com/questions/43114/how-to-convert-to-gaussian-distribution-with-given-mean-and-standard-deviation
+http://mathworld.wolfram.com/FourierTransformGaussian.html
+http://stats.stackexchange.com/questions/43114/how-to-convert-to-gaussian-distribution-with-given-mean-and-standard-deviation
+http://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform
+http://www.musicdsp.org/archive.php?classid=0#129
+http://www.embeddedrelated.com/showcode/311.php
+http://www.musicdsp.org/showone.php?id=168
+http://www.dspguru.com/dsp/howtos/how-to-generate-white-gaussian-noise
+http://fr.mathworks.com/help/stats/normrnd.html
+http://stackoverflow.com/questions/2325472/generate-random-numbers-following-a-normal-distribution-in-c-c
+http://www.cplusplus.com/reference/random/normal_distribution/
+http://www.cplusplus.com/forum/general/13943/
